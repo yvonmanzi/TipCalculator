@@ -10,26 +10,29 @@ class TipCalculator extends React{
             amount: null
         };
 
-        //binding 'this'
+        //binding 'this' to the methods
         this.calculate = this.calculate.bind(this);
+        this.handleNameInput = this.handleNameInput.bind(this);
+        this.handleAmountInput = this.handleAmountInput.bind(this);
     }
     handleNameInput(event){
         this.setState({
-            name: target.event.value,
+            name: event.target.value,
             amount: ''
         });
     }
-        handleAmountInput(event){
-            this.setState({
-                name: this.name,
-                amount: target.event.value
-            });
-        }
+    handleAmountInput(event){
+        this.setState({
+             name: this.name,
+             amount: event.target.value
+        });
+    }
     
     calculate(){
         const tip = parseInt(this.state.props.amount)*0.2;// it would be kool to pass this % as a prop
         return tip;
     }
+    
 render(){
 
     return(
@@ -43,6 +46,7 @@ render(){
             <p> Hi {this.state.name}! Your bill is: {this.state.amount}</p>
             <hr/>
             <button type = "button" onClick= {this.calculate}> Calculate </button>
+        
             <input type="input">{this.calculate}</input>
         </div>
 
@@ -50,7 +54,7 @@ render(){
 }
 }
 TipCalculator.propType = {
-    name: propType.string,
-    amount: propType.number
+    name: propType.string.isRequired,
+    amount: propType.number.isRequired
 };
 export default TipCalculator;
