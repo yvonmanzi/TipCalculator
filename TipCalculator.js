@@ -1,4 +1,4 @@
-import React, {propType, Component} from 'react';
+import React from 'react';
 //import Form from './Form.js';
 
 class TipCalculator extends React.Component{
@@ -7,7 +7,8 @@ class TipCalculator extends React.Component{
 
         this.state = {
             name: " ",
-            amount: null
+            amount: null,
+            tip: null
         };
 
         //binding 'this'
@@ -27,24 +28,25 @@ class TipCalculator extends React.Component{
     }
     
     calculate(){
-        var tip = parseInt(this.state.amount)*0.2;// it would be kool to pass this % as a prop
-        return tip;
+        this.setState ({
+            tip: parseInt(this.state.amount)* this.props.percentage // it would be kool to pass this % as a prop
+        });
     }
 render(){
 
     return(
         <div>
-            <h1> Tipping should be fun</h1>
+            <h1 style ={{color: "blue"}} > Tipping should be fun!</h1>
 
             <p> Your Name: <input value={this.state.name} onChange = {this.handleNameInput} /> </p>
 
-            <p> Bill: <input value={this.state.amount} onChange = {this.handleAmountInput} /> </p>
-            <hr/>
+            <p> Your Bill: <input value={this.state.amount} onChange = {this.handleAmountInput} /> </p>
+            
             <p> Hi {this.state.name}! Your bill is: {this.state.amount}</p>
             <hr/>
-            <button type = "button" onClick= {this.calculate}> Calculate </button>
+            <button type = "button" style = {{color: "red"}} onClick= {this.calculate}> Calculate My Tip </button>
 
-            <p> Here is your tip: <input type="input" value= {this.calculate} /> </p>
+            <p> Here is your tip: <input type="input" value= {this.state.tip} /> </p>
         </div>
 
     );
